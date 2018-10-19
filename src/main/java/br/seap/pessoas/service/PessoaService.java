@@ -2,7 +2,6 @@ package br.seap.pessoas.service;
 
 import javax.transaction.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +17,14 @@ public class PessoaService {
 	@Autowired
 	private PessoaRepository pessoaRepository;
 	
-	public List<Pessoa> buscar(Long id){
-		if(id == null) {
-			return pessoaRepository.findAll();
-		} else {
-			List<Pessoa> lista = new ArrayList<Pessoa>();
-			Pessoa pessoa = pessoaRepository.findOne(id);
-			lista.add(pessoa);
-			return lista;
-		}
+	public Pessoa buscarPorId(Long id) {		
+		return pessoaRepository.findOne(id);
 	}
-		
+	
+	public List<Pessoa> buscarTodas() {		
+		return pessoaRepository.findAll();
+	}
+	
 	public Pessoa save(Pessoa pessoa) {
 		return pessoaRepository.save(pessoa);
 	}

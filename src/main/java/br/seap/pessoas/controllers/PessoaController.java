@@ -1,7 +1,6 @@
 package br.seap.pessoas.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,9 +20,14 @@ public class PessoaController{
 	@Autowired
 	private PessoaService pessoaService;
 	
-	@RequestMapping(value= {"pessoa", "pessoa/{id}"}, method=RequestMethod.GET)
-	public Object read(@PathVariable Optional<Long> id) {
-		return new ResponseEntity<List<Pessoa>>(pessoaService.buscar(id.get()), HttpStatus.OK);		
+	@RequestMapping(value= {"pessoa"}, method=RequestMethod.GET)
+	public Object read() {
+		return new ResponseEntity<List<Pessoa>>(pessoaService.buscarTodas(), HttpStatus.OK);		
+	}
+	
+	@RequestMapping(value= {"pessoa/{id}"}, method=RequestMethod.GET)
+	public Object read(@PathVariable("id") Long id) {
+		return new ResponseEntity<Pessoa>(pessoaService.buscarPorId(id), HttpStatus.OK);		
 	}
 	
 	@RequestMapping(value = {"pessoa"}, method= RequestMethod.POST)
