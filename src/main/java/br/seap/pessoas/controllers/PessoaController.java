@@ -43,7 +43,7 @@ public class PessoaController{
 	@RequestMapping(value = {"pessoa/{id}"}, method= RequestMethod.DELETE)
 	public Object delete(@PathVariable("id") Long id) {
 		pessoaService.delete(id);
-		return "Registro apagado!";
+		return new ResponseEntity<Object>("Pessoa deletada com sucesso", HttpStatus.OK);
 	}
 	
 }
