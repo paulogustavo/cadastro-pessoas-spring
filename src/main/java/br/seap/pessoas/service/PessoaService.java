@@ -4,6 +4,7 @@ import javax.transaction.Transactional;
 
 import java.util.List;
 
+import br.seap.pessoas.models.query.QPessoa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,9 @@ public class PessoaService {
 	private PessoaRepository pessoaRepository;
 	
 	public Pessoa buscarPorId(Long id) {		
-		return pessoaRepository.findOne(id);
+
+		return new QPessoa().id.eq(id).findOne();
+
 	}
 	
 	public List<Pessoa> buscarTodas() {		
